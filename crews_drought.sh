@@ -1,10 +1,9 @@
 #!/bin/bash
 
 # Change this to suit.
-
 export DL_DIR=~/climatology/crewsPNG/july
 download_access=true	# default true
-download_montly=true	# default true
+download_monthly=true	# default true
 download_daily=false	# default false
 
 function check_folder ()
@@ -49,7 +48,7 @@ fi
 if [ "$download_monthly" = true ]; then
 	check_folder ${DL_DIR}/satellite_products/monthly
 
-	now=$(date + "%Y%m%d")
+	now=$(date +"%Y%m%d")
 	not_exists=true
 	echo $not_exists
 	while [ "$not_exists" = true ]
@@ -57,7 +56,7 @@ if [ "$download_monthly" = true ]; then
 		validate_url http://access-s.clide.cloud/files/archive/$now/project/PNG_crews/SEMDP-products/monthly/
 		if [ $? == 0 ]; then
 			echo $now exists
-			for agg_period in 1 2 3 4 5 6 # Select monthly periods. If new ones needed, contact BOM.
+			for agg_period in 1 2 3 4 6 # Select monthly periods. If new ones needed, contact BOM.
 			do
 				# For var in gsmap gsmap.pct hir spi.moments.png.gsmap ndvi vhi hir.pct		# Select monthly variables. Can add others if needed
 				for var in gsmap.pct vhi spi.moments.png.gsmap		# Default
@@ -68,7 +67,7 @@ if [ "$download_monthly" = true ]; then
 			not_exists=false
 		else
 			echo $now does not exists
-			now=$(date -d "${now} -1 days" + "%Y%m%d")
+			now=$(date -d "${now} -1 days" +"%Y%m%d")
 		fi
 	done
 fi
