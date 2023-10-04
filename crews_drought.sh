@@ -30,7 +30,7 @@ function clean_archive {
 
 }
 
-#	# ACCESS-S products
+# # ACCESS-S products
 
 if [ "$download_access" = true ]; then
 	for domain in PNG_crews_ag aiyura asaro bena kerevat markham	# Select domains. Can add others if needed.
